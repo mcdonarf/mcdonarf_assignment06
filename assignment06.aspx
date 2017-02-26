@@ -32,8 +32,9 @@
         <asp:Label ID="lblPricePerSaleToCustomer" runat="server" Text="Enter the price per sellable unit to the customer."></asp:Label>
         <asp:TextBox ID="txtPricePerSaleToCustomer" runat="server"></asp:TextBox> <br />
         <asp:Label ID="lblTransDetailComment" runat="server" Text="Leave a comment if prefered for the transaction detail."></asp:Label>
-        <asp:TextBox ID="txtTransDetailComment" runat="server" TextMode="MultiLine"></asp:TextBox>
-
+        <asp:TextBox ID="txtTransDetailComment" runat="server" TextMode="MultiLine"></asp:TextBox> <br />
+        <asp:Button ID="btnInsert" runat="server" Text="Insert" OnClick="btnInsert_Click" /> <br />
+        <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
     </div>
     </form>
 </body>

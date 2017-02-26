@@ -9,10 +9,15 @@ using LoyaltyTableAdapters;
 using TransactionTypeTableAdapters;
 using EmplTableAdapters;
 using ProductTableAdapters;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 public partial class _Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
         if (!IsPostBack) {
+            lblMessage.Visible = false;
+
             tStoreTableAdapter myTableAdapterStore = new tStoreTableAdapter();
             Store.tStoreDataTable myTableStore = myTableAdapterStore.GetData();
             ddlStore.DataTextField = "Store";
@@ -49,4 +54,62 @@ public partial class _Default : System.Web.UI.Page {
             lbProduct.DataBind();
             }
         }
+
+    protected void btnInsert_Click(object sender, EventArgs e)
+    {
+        lblMessage.Visible = true;
+
+        string constr = ConfigurationManager.ConnectionStrings["GroceryStoreSimulatorConnectionString"].ToString();
+        SqlConnection con = new SqlConnection(constr);
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.CommandText = "spAddTransactionAndDetail";
+        cmd.Connection = con;
+
+        cmd.Parameters.Add("@DateOfTransaction", SqlDbType.VarChar).Value = txtTransactionDate.Text.Trim();
+        cmd.Parameters.Add("@TimeOfTransaction", SqlDbType.VarChar).Value = txtTransactionTime.Text.Trim();
+        cmd.Parameters.Add("@TransactionComment", SqlDbType.VarChar).Value = txtComment.Text.Trim();
+        cmd.Parameters.Add("@Qty", SqlDbType.Int).Value = txtQtyOfProduct.Text.Trim();
+        cmd.Parameters.Add("@PricePerSellableUnitAsMarked", SqlDbType.VarChar).Value = txtPricePerSale.Text.Trim();
+        cmd.Parameters.Add("@PricePerSellableUnitToTheCustomer", SqlDbType.VarChar).Value = txtPricePerSaleToCustomer.Text.Trim();
+        cmd.Parameters.Add("@TransactionDetailComment", SqlDbType.VarChar).Value = txtTransDetailComment.Text.Trim();
+        cmd.Parameters.Add("@LoyaltyID", SqlDbType.Int).Value = ddlLoyalty.SelectedValue;
+        cmd.Parameters.Add("@StoreID", SqlDbType.Int).Value = ddlStore.SelectedValue;
+        cmd.Parameters.Add("@TransactionTypeID", SqlDbType.Int).Value = ddlTransactionType.SelectedValue;
+        cmd.Parameters.Add("@EmplID", SqlDbType.Int).Value = ddlEmpl.SelectedValue;
+        cmd.Parameters.Add("@ProductID", SqlDbType.Int).Value = lbProduct.SelectedValue;
+        //cmd.Parameters.Add("@couponDetailID", SqlDbType.Int).Value = ; find a way to get this to work 
+        //cmd.Parameters.Add("@TransactionID", SqlDbType.Int).Value = ; find a way to get this to work
+
+        try
+
+        {
+
+            con.Open();
+
+            cmd.ExecuteNonQuery();
+
+            lblMessage.Text = "Record inserted successfully";
+
+        }
+
+        catch (Exception ex)
+
+        {
+
+            throw ex;
+
+        }
+
+        finally
+
+        {
+
+            con.Close();
+
+            con.Dispose();
+
+        }
+
     }
+}
