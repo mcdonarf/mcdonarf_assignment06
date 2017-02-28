@@ -10,6 +10,7 @@ using LoyaltyTableAdapters;
 using TransactionTypeTableAdapters;
 using EmplTableAdapters;
 using ProductTableAdapters;
+using CouponTableAdapters;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
@@ -53,8 +54,15 @@ public partial class _Default : System.Web.UI.Page {
             lbProduct.DataValueField = "ProductID";
             lbProduct.DataSource = myTableProduct;
             lbProduct.DataBind();
-            }
+
+            tCouponDetailTableAdapter myTableAdapterCoupon = new tCouponDetailTableAdapter();
+            Coupon.tCouponDetailDataTable myTableCoupon = myTableAdapterCoupon.GetData();
+            ddlCoupon.DataTextField = "Coupon";
+            ddlCoupon.DataValueField = "CouponDetailID";
+            ddlCoupon.DataSource = myTableCoupon;
+            ddlCoupon.DataBind();
         }
+    }
 
     protected void btnInsert_Click(object sender, EventArgs e)
     {
@@ -79,8 +87,8 @@ public partial class _Default : System.Web.UI.Page {
         cmd.Parameters.Add("@TransactionTypeID", SqlDbType.Int).Value = ddlTransactionType.SelectedValue;
         cmd.Parameters.Add("@EmplID", SqlDbType.Int).Value = ddlEmpl.SelectedValue;
         cmd.Parameters.Add("@ProductID", SqlDbType.Int).Value = lbProduct.SelectedValue;
-        //cmd.Parameters.Add("@couponDetailID", SqlDbType.Int).Value = ; find a way to get this to work 
-        //cmd.Parameters.Add("@TransactionID", SqlDbType.Int).Value = ; find a way to get this to work
+        cmd.Parameters.Add("@couponDetailID", SqlDbType.Int).Value = ddlCoupon.SelectedValue;
+        cmd.Parameters.Add("@TransactionID", SqlDbType.Int).Value = "@@IDENTITY";
 
         try
 

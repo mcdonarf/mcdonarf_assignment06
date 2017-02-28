@@ -33,6 +33,8 @@
         <asp:TextBox ID="txtPricePerSaleToCustomer" runat="server"></asp:TextBox> <br />
         <asp:Label ID="lblTransDetailComment" runat="server" Text="Leave a comment if prefered for the transaction detail."></asp:Label>
         <asp:TextBox ID="txtTransDetailComment" runat="server" TextMode="MultiLine"></asp:TextBox> <br />
+        <asp:Label ID="lblCoupon" runat="server" Text="Select Coupon"></asp:Label>
+        <asp:DropDownList ID="ddlCoupon" runat="server"></asp:DropDownList>
         <asp:Button ID="btnInsert" runat="server" Text="Insert" OnClick="btnInsert_Click" /> <br />
         <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
     </div>
