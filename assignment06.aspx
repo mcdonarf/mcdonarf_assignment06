@@ -6,9 +6,11 @@
 <head runat="server">
     <title>Assignment 06</title>
 </head>
-<body>
+<body style="background-color:aliceblue; color:yellow">
+    <h1>Grocery Store Simulator!</h1>
     <form id="form1" runat="server">
-    <div>
+        <h2>Transaction and Transaction Detail Insertion</h2>
+    <div style="background-color:mediumpurple; border:5px solid red">
         <asp:Label ID="lblTransactionTime" runat="server" Text="Enter Transaction Time: HH:MM:SS(24H)"></asp:Label>
         <asp:TextBox ID="txtTransactionTime" runat="server" TextMode="Time"></asp:TextBox> <br />
         <asp:Label ID="lblTransactionDate" runat="server" Text="Enter Transaction Date: YYYY-MM-DD"></asp:Label>
@@ -33,8 +35,8 @@
         <asp:TextBox ID="txtPricePerSaleToCustomer" runat="server"></asp:TextBox> <br />
         <asp:Label ID="lblTransDetailComment" runat="server" Text="Leave a comment if prefered for the transaction detail."></asp:Label>
         <asp:TextBox ID="txtTransDetailComment" runat="server" TextMode="MultiLine"></asp:TextBox> <br />
-        <asp:Label ID="lblCoupon" runat="server" Text="Select Coupon"></asp:Label>
-        <asp:DropDownList ID="ddlCoupon" runat="server"></asp:DropDownList>
+        <%/* <asp:Label ID="lblCoupon" runat="server" Text="Select Coupon"></asp:Label>
+        <asp:DropDownList ID="ddlCoupon" runat="server"></asp:DropDownList> <br /> */%>
         <asp:Button ID="btnInsert" runat="server" Text="Insert" OnClick="btnInsert_Click" /> <br />
         <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
     </div>
